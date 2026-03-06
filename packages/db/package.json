@@ -1,0 +1,17 @@
+{
+  "name": "@kz/db",
+  "version": "0.0.1",
+  "private": true,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "lint": "echo 'Linting db...'",
+    "build": "echo 'Building db...'"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.39.3"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.30.4"
+  }
+}

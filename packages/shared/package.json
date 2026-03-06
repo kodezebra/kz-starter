@@ -1,0 +1,11 @@
+{
+  "name": "@kz/shared",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "lint": "echo 'Shared package linting...'",
+    "build": "echo 'Shared package building...'"
+  }
+}

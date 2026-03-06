@@ -1,0 +1,17 @@
+meta {
+  name: "Add Block To Page"
+  type: "http"
+  seq: 4
+}
+
+post {
+  url: "{{baseUrl}}/v1/pages/{{pageId}}/blocks"
+  body: json
+  auth: none
+}
+
+body:json {
+  "type": "text",
+  "content": "This is the content of the new block.",
+  "order": 0
+}

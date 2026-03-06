@@ -1,0 +1,16 @@
+meta {
+  name: "Create Page"
+  type: "http"
+  seq: 3
+}
+
+post {
+  url: "{{baseUrl}}/v1/pages"
+  body: json
+  auth: none
+}
+
+body:json {
+  "title": "My New Page",
+  "slug": "my-new-page"
+}

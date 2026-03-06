@@ -1,0 +1,29 @@
+{
+  "name": "@kz/api",
+  "type": "module",
+  "scripts": {
+    "build": "echo Building api...",
+    "typecheck": "tsc --noEmit",
+    "lint": "echo Linting api...",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy --minify",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
+    "db:create": "bunx wrangler d1 create app-db",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "bunx wrangler d1 migrations apply app-db --local",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "@kz/shared": "workspace:*",
+    "drizzle-orm": "^0.45.1",
+    "hono": "^4.12.3",
+    "nanoid": "^5.1.6"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250109.0",
+    "@types/nanoid": "^3.0.0",
+    "drizzle-kit": "^0.31.9",
+    "typescript": "^5.7.3",
+    "wrangler": "^4.4.0"
+  }
+}
