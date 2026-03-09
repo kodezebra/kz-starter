@@ -13,6 +13,7 @@
     "db:create": "bunx wrangler d1 create app-db",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "bunx wrangler d1 migrations apply app-db --local",
+    "db:migrate:remote": "bunx wrangler d1 migrations apply app-db --remote",
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {

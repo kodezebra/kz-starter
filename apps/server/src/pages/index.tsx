@@ -64,6 +64,7 @@ export async function renderPage(c: Context, slug: string) {
 
   if (isNotFound) {
     if (isHome) {
+      const dashboardUrl = c.env.DASHBOARD_URL || "http://localhost:5173";
       return c.html(
         <Layout title="Welcome to FSK CMS">
           <div class="flex flex-col items-center justify-center min-h-[60vh] text-center p-8">
@@ -72,7 +73,7 @@ export async function renderPage(c: Context, slug: string) {
               Your site is ready! To get started, create a page with the slug <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded">home</code> in the dashboard.
             </p>
             <div class="flex gap-4">
-              <a href="http://localhost:5173" class="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20">Go to Dashboard</a>
+              <a href={dashboardUrl} class="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20">Go to Dashboard</a>
             </div>
           </div>
         </Layout>
