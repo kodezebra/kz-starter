@@ -5,7 +5,10 @@
   "main": "index.ts",
   "types": "index.ts",
   "scripts": {
-    "lint": "echo 'Shared package linting...'",
-    "build": "echo 'Shared package building...'"
+    "lint": "echo Shared package linting...",
+    "build": "echo Shared package building..."
+  },
+  "dependencies": {
+    "better-auth": "latest"
   }
 }

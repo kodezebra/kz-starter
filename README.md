@@ -1,14 +1,13 @@
-# FSK CMS Starter (Hono + React + Astro)
+# FSK CMS Starter (Hono + React)
 
 A high-performance, full-stack headless CMS starter designed for the Cloudflare ecosystem (D1, R2, Workers).
 
 ## 🚀 The Stack
 
-- **API:** [Hono](https://hono.dev/) running on Cloudflare Workers.
+- **Server:** [Hono](https://hono.dev/) running on Cloudflare Workers (API + SSR pages).
 - **Database:** [Drizzle ORM](https://orm.drizzle.team/) with Cloudflare D1.
 - **Storage:** Cloudflare R2 for assets with automatic orphaned file cleanup.
-- **Dashboard:** React + Tailwind CSS + Shadcn UI + Lucide Icons.
-- **Frontend:** [Astro](https://astro.build/) for lightning-fast delivery.
+- **Dashboard:** React + Tailwind CSS + Shadcn UI + Lucide Icons (Vite).
 - **Monorepo:** Managed by [Turbo](https://turbo.build/).
 
 ## ✨ Features
@@ -55,9 +54,8 @@ bun run dev
 
 ## 📦 Project Structure
 
-- `apps/api`: Hono API, D1/Drizzle logic, R2 asset handling.
+- `apps/server`: Hono API, D1/Drizzle logic, R2 asset handling, SSR public pages.
 - `apps/dashboard`: React-based CMS management interface.
-- `apps/web`: Astro frontend for rendering content.
 - `packages/shared`: Shared types and API client.
 - `packages/db`: Centralized Drizzle schema.
 

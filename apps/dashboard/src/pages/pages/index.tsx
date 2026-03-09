@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react"
 import { api } from "@/lib/api"
-import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Plus, Search, MoreVertical, Trash, Edit2 } from "lucide-react"
+import { Plus, Search, Trash, Edit2 } from "lucide-react"
 import { Link } from "react-router-dom"
 import { toast } from "sonner"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 export default function PagesList() {
   const [pages, setPages] = useState<any[]>([])
@@ -50,7 +51,14 @@ export default function PagesList() {
     p.slug.toLowerCase().includes(search.toLowerCase())
   )
 
-  if (loading) return <div className="p-8 text-center">Loading pages...</div>
+  if (loading) return (
+    <div className="flex items-center justify-center min-h-[400px]">
+      <div className="flex flex-col items-center gap-2">
+        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+        <p className="text-sm text-muted-foreground">Loading pages...</p>
+      </div>
+    </div>
+  )
 
   return (
     <div className="p-8 space-y-6">
@@ -71,55 +79,70 @@ export default function PagesList() {
         <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
         <input
           placeholder="Search pages..."
-          className="w-full bg-background border rounded-md pl-10 pr-4 py-2"
+          className="w-full bg-background border rounded-md pl-10 pr-4 py-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
-      <div className="grid gap-4">
-        {filteredPages.length > 0 ? (
-          filteredPages.map((page) => (
-            <Card key={page.id} className="p-4 flex items-center justify-between group hover:border-blue-500/50 transition-colors">
-              <div className="flex flex-col">
-                <span className="font-semibold text-lg">{page.title}</span>
-                <span className="text-sm text-muted-foreground">/{page.slug}</span>
-              </div>
-              
-              <div className="flex items-center gap-4">
-                <Badge variant={page.isPublished ? "default" : "secondary"}>
-                  {page.isPublished ? "Published" : "Draft"}
-                </Badge>
-                
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon">
-                      <MoreVertical className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem asChild>
-                      <Link to={`/pages/${page.id}`} className="flex items-center">
-                        <Edit2 className="h-4 w-4 mr-2" /> Edit
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem 
-                      className="text-red-600 focus:text-red-600 focus:bg-red-50"
-                      onClick={() => handleDelete(page.id)}
-                    >
-                      <Trash className="h-4 w-4 mr-2" /> Delete
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-            </Card>
-          ))
-        ) : (
-          <div className="text-center p-12 border-2 border-dashed rounded-lg text-muted-foreground">
-            No pages found.
-          </div>
-        )}
+      <div className="rounded-md border bg-card">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Title</TableHead>
+              <TableHead>Slug</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Last Updated</TableHead>
+              <TableHead className="text-right">Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {filteredPages.length > 0 ? (
+              filteredPages.map((page) => (
+                <TableRow key={page.id} className="group">
+                  <TableCell className="font-medium">{page.title}</TableCell>
+                  <TableCell>
+                    <code className="bg-muted px-1.5 py-0.5 rounded text-xs font-mono">/{page.slug}</code>
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant={page.isPublished ? "default" : "secondary"}>
+                      {page.isPublished ? "Published" : "Draft"}
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="text-muted-foreground text-sm">
+                    {new Date(page.updatedAt).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <div className="flex justify-end gap-2">
+                      <Button variant="ghost" size="icon" asChild title="Edit Page">
+                        <Link to={`/pages/${page.id}`}>
+                          <Edit2 className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        onClick={() => handleDelete(page.id)}
+                        className="text-red-500 hover:text-red-600 hover:bg-red-50"
+                        title="Delete Page"
+                      >
+                        <Trash className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={5} className="h-24 text-center">
+                  No pages found.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
       </div>
     </div>
   )
 }
+
