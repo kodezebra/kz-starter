@@ -10,6 +10,8 @@ const app = new Hono<{ Bindings: Bindings, Variables: Variables }>();
 app.use(cors({
   origin: (origin) => origin,
   credentials: true,
+  allowMethods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
+  allowHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Better Auth middleware to inject user/session into context

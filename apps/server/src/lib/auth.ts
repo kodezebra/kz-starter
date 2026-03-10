@@ -5,7 +5,7 @@ import * as schema from '@/db/schema';
 import type { Bindings } from '@/types';
 
 export const getAuth = (env: Bindings) => {
-  // const trustedOrigins = (env.TRUSTED_ORIGINS ?? 'http://localhost:5173').split(',');
+  const trustedOrigins = (env.TRUSTED_ORIGINS ?? 'http://localhost:5173').split(',');
 
   return betterAuth({
     database: drizzleAdapter(drizzle(env.DB, { schema }), {
@@ -17,6 +17,6 @@ export const getAuth = (env: Bindings) => {
     },
     secret: env.BETTER_AUTH_SECRET,
     baseURL: env.BETTER_AUTH_URL,
-    // trustedOrigins,
+    trustedOrigins,
   });
 };
